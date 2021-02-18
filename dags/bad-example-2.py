@@ -5,8 +5,8 @@ from airflow.version import version
 from datetime import datetime, timedelta
 import pandas as pd
 
-#Example use case: we need to refresh a materialized view in a Postgres database, then perform multiple transformations on that data.
-#The data is large (measured in gigabytes)
+#Example use case: we need to refresh a materialized view in a Postgres database, then perform multiple transformations on that data,
+#before loading it into another table. The data is large (measured in gigabytes).
     
 
 def data_processing_func(**kwargs):
@@ -22,6 +22,10 @@ def data_processing_func(**kwargs):
     #Process data in-memory using Pandas
     pivot_df = df.pivot(index='DATE', columns='STATE', values='POSITIVE').reset_index()
     pivot_df2 = df.pivot(index='DATE', columns='STATE', values='NEGATIVE').reset_index()
+
+    #to-sql
+    pivot_df.to_sql('table1', conn)
+    pivot_df2.to_sql('table2', conn)
 
 
 # Default settings applied to all tasks

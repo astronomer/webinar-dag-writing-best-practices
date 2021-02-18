@@ -32,7 +32,7 @@ default_args = {
     'retry_delay': timedelta(minutes=2)
 }
 
-with DAG('databricks_dag',
+with DAG('good_practices_dag_2',
     start_date=datetime(2021, 1, 1),
     schedule_interval='@daily',
     catchup=False,

@@ -38,7 +38,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
-with DAG('bad_practices_dag_2',
+with DAG('orchestration_bad_practices',
          start_date=datetime.today(),
          max_active_runs=3,
          schedule_interval='@daily',

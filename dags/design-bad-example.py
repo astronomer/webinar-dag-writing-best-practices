@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 #Once the queries have been completed successfully we send an email notification.
 
 #Variables used by tasks
-email_to = 'kenten@astronomer.io'
+email_to = 'noreply@astronomer.io'
 #Define today's and yesterday's date using datetime module
 today = datetime.today()
 yesterday = datetime.today() - timedelta(1)
@@ -24,7 +24,7 @@ default_args = {
 }
 
 #Instantiate DAG
-with DAG('bad_practices_dag_1',
+with DAG('design_bad_practices',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
          schedule_interval='@daily',

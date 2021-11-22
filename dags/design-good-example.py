@@ -9,25 +9,20 @@ from datetime import datetime, timedelta
 #Once the queries have been completed successfully we send an email notification.
 
 #Variables used by tasks
-states = ['CO', 'WA', 'OR']
-email_to = 'kenten@astronomer.io'
-
-#Default settings applied to all tasks
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
-}
+states = ['CO', 'WA', 'OR', 'CA']
+email_to = 'noreply@astronomer.io'
 
 #Instantiate DAG
-with DAG('good_practices_dag_1',
+with DAG('design_good_practices',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
          schedule_interval='@daily',
-         default_args=default_args,
+         default_args={
+            'owner': 'airflow',
+            'email_on_failure': False,
+            'retries': 1,
+            'retry_delay': timedelta(minutes=1)
+        },
          catchup=False,
          template_searchpath='/usr/local/airflow/include' #include path to look for external files
          ) as dag:
